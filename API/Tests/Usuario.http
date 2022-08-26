@@ -1,0 +1,14 @@
+### Listar os usuários
+GET https://localhost:5001/api/usuario/listar
+
+### Buscar um usuário
+GET https://localhost:5001/api/usuario/buscar/diogo
+
+### Cadastrar um usuário
+POST https://localhost:5001/api/usuario/cadastrar
+Content-Type: application/json
+
+{
+    "login" : "diogo",
+    "senha" : "123456789"
+}
