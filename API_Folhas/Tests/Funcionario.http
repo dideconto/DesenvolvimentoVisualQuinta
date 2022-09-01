@@ -1,0 +1,14 @@
+### Listar os funcionários
+GET https://localhost:5001/api/funcionario/listar
+
+### Buscar um funcionário
+GET https://localhost:5001/api/funcionario/buscar/1234
+
+### Cadastrar um funcionário
+POST https://localhost:5001/api/funcionario/cadastrar
+Content-Type: application/json
+
+{
+    "nome" : "diogo",
+    "cpf" : "123"
+}
