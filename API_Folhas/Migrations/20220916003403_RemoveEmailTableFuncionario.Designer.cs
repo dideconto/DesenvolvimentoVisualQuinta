@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_FOlhas.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220902012836_NomeMigracao")]
-    partial class NomeMigracao
+    [Migration("20220916003403_RemoveEmailTableFuncionario")]
+    partial class RemoveEmailTableFuncionario
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,9 +18,20 @@ namespace API_FOlhas.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.17");
 
+            modelBuilder.Entity("API_Folhas.Models.FolhaPagamento", b =>
+                {
+                    b.Property<int>("FolhaPagamentoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("FolhaPagamentoId");
+
+                    b.ToTable("Folhas");
+                });
+
             modelBuilder.Entity("API_Folhas.Models.Funcionario", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("FuncionarioId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -36,7 +47,7 @@ namespace API_FOlhas.Migrations
                     b.Property<string>("Nome")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("FuncionarioId");
 
                     b.ToTable("Funcionarios");
                 });

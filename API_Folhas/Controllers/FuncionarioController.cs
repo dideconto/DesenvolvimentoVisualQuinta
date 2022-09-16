@@ -9,19 +9,26 @@ namespace API_Folhas.Controllers
     [Route("api/funcionario")]
     public class FuncionarioController : ControllerBase
     {
+        private readonly DataContext _context;
+
+        //Injeção de dependência - balta.io
+        public FuncionarioController(DataContext context) =>
+            _context = context;
+
         private static List<Funcionario> funcionarios = new List<Funcionario>();
 
         // GET: /api/funcionario/listar
         [Route("listar")]
         [HttpGet]
-        public IActionResult Listar() => Ok(funcionarios);
+        public IActionResult Listar() => Ok(_context.Funcionarios.ToList());
 
         // POST: /api/funcionario/cadastrar
         [Route("cadastrar")]
         [HttpPost]
         public IActionResult Cadastrar([FromBody] Funcionario funcionario)
         {
-            funcionarios.Add(funcionario);
+            _context.Funcionarios.Add(funcionario);
+            _context.SaveChanges();
             return Created("", funcionario);
         }
 
@@ -31,7 +38,7 @@ namespace API_Folhas.Controllers
         public IActionResult Buscar([FromRoute] string cpf)
         {
             //Expressão lambda
-            Funcionario funcionario = funcionarios.FirstOrDefault
+            Funcionario funcionario = _context.Funcionarios.FirstOrDefault
             (
                 f => f.Cpf.Equals(cpf)
             );
@@ -87,4 +94,7 @@ namespace API_Folhas.Controllers
 //     {
 //         return Ok(f);
 //     }
+// }
+// foreach(Funcionario f in _context.Funcionarios.ToList()){
+
 // }
