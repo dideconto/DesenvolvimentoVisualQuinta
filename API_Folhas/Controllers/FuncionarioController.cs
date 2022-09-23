@@ -20,7 +20,8 @@ namespace API_Folhas.Controllers
         // GET: /api/funcionario/listar
         [Route("listar")]
         [HttpGet]
-        public IActionResult Listar() => Ok(_context.Funcionarios.ToList());
+        public IActionResult Listar() =>
+            Ok(_context.Funcionarios.ToList());
 
         // POST: /api/funcionario/cadastrar
         [Route("cadastrar")]
@@ -38,7 +39,8 @@ namespace API_Folhas.Controllers
         public IActionResult Buscar([FromRoute] string cpf)
         {
             //Expressão lambda
-            Funcionario funcionario = _context.Funcionarios.FirstOrDefault
+            Funcionario funcionario =
+                _context.Funcionarios.FirstOrDefault
             (
                 f => f.Cpf.Equals(cpf)
             );
@@ -46,18 +48,17 @@ namespace API_Folhas.Controllers
             return funcionario != null ? Ok(funcionario) : NotFound();
         }
 
-        // DELETE: /api/funcionario/deletar/123
-        [Route("deletar/{cpf}")]
+        // DELETE: /api/funcionario/deletar/1
+        [Route("deletar/{id}")]
         [HttpDelete]
-        public IActionResult Deletar([FromRoute] string cpf)
+        public IActionResult Deletar([FromRoute] int id)
         {
-            Funcionario funcionario = funcionarios.FirstOrDefault
-            (
-                f => f.Cpf.Equals(cpf)
-            );
+            Funcionario funcionario =
+                _context.Funcionarios.Find(id);
             if (funcionario != null)
             {
-                funcionarios.Remove(funcionario);
+                _context.Funcionarios.Remove(funcionario);
+                _context.SaveChanges();
                 return Ok(funcionario);
             }
             return NotFound();
@@ -68,16 +69,9 @@ namespace API_Folhas.Controllers
         [HttpPatch]
         public IActionResult Alterar([FromBody] Funcionario funcionario)
         {
-            Funcionario funcionarioBuscado = funcionarios.FirstOrDefault
-            (
-                f => f.Cpf.Equals(funcionario.Cpf)
-            );
-            if (funcionarioBuscado != null)
-            {
-                funcionarioBuscado.Nome = funcionario.Nome;
-                return Ok(funcionario);
-            }
-            return NotFound();
+            _context.Funcionarios.Update(funcionario);
+            _context.SaveChanges();
+            return Ok(funcionario);
         }
     }
 }
