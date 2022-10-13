@@ -1,0 +1,11 @@
+# ### Listar os funcionários
+# GET https://localhost:5001/api/funcionario/listar
+
+### Cadastrar uma folha
+POST https://localhost:5001/api/folha/cadastrar
+Content-Type: application/json
+
+{
+    "valorHora" : 50,
+    "quantidadeHoras" : 100
+}

@@ -18,11 +18,32 @@ namespace API_FOlhas.Migrations
 
             modelBuilder.Entity("API_Folhas.Models.FolhaPagamento", b =>
                 {
-                    b.Property<int>("FolhaPagamentoId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("FolhaPagamentoId");
+                    b.Property<double>("ImpostoFgts")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("ImpostoInss")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("ImpostoRenda")
+                        .HasColumnType("REAL");
+
+                    b.Property<int>("QuantidadeHoras")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("SalarioBruto")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("SalarioLiquido")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("ValorHora")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Folhas");
                 });

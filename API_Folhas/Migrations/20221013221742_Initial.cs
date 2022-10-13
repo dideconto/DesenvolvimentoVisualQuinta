@@ -8,25 +8,15 @@ namespace API_FOlhas.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Folhas",
-                columns: table => new
-                {
-                    FolhaPagamentoId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Folhas", x => x.FolhaPagamentoId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Funcionarios",
                 columns: table => new
                 {
                     FuncionarioId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Nome = table.Column<string>(type: "TEXT", nullable: true),
-                    Cpf = table.Column<string>(type: "TEXT", nullable: true),
+                    Nome = table.Column<string>(type: "TEXT", nullable: false),
+                    Cpf = table.Column<string>(type: "TEXT", maxLength: 11, nullable: false),
+                    Email = table.Column<string>(type: "TEXT", nullable: true),
+                    Salario = table.Column<int>(type: "INTEGER", nullable: false),
                     Nascimento = table.Column<DateTime>(type: "TEXT", nullable: false),
                     CriadoEm = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
@@ -38,9 +28,6 @@ namespace API_FOlhas.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Folhas");
-
             migrationBuilder.DropTable(
                 name: "Funcionarios");
         }

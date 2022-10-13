@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_FOlhas.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220916003403_RemoveEmailTableFuncionario")]
-    partial class RemoveEmailTableFuncionario
+    [Migration("20221013222641_AddTableFolhas")]
+    partial class AddTableFolhas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,11 +20,17 @@ namespace API_FOlhas.Migrations
 
             modelBuilder.Entity("API_Folhas.Models.FolhaPagamento", b =>
                 {
-                    b.Property<int>("FolhaPagamentoId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("FolhaPagamentoId");
+                    b.Property<int>("QuantidadeHoras")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("ValorHora")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Folhas");
                 });
@@ -36,16 +42,25 @@ namespace API_FOlhas.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasMaxLength(11)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CriadoEm")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("Nascimento")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Salario")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("FuncionarioId");
 

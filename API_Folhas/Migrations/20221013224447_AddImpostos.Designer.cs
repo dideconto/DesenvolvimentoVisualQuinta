@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_FOlhas.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220916002352_AddEmailTableFuncionario")]
-    partial class AddEmailTableFuncionario
+    [Migration("20221013224447_AddImpostos")]
+    partial class AddImpostos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,11 +20,32 @@ namespace API_FOlhas.Migrations
 
             modelBuilder.Entity("API_Folhas.Models.FolhaPagamento", b =>
                 {
-                    b.Property<int>("FolhaPagamentoId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("FolhaPagamentoId");
+                    b.Property<double>("ImpostoFgts")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("ImpostoInss")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("ImpostoRenda")
+                        .HasColumnType("REAL");
+
+                    b.Property<int>("QuantidadeHoras")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("SalarioBruto")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("SalarioLiquido")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("ValorHora")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("Id");
 
                     b.ToTable("Folhas");
                 });
@@ -36,6 +57,8 @@ namespace API_FOlhas.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasMaxLength(11)
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CriadoEm")
@@ -48,7 +71,11 @@ namespace API_FOlhas.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Salario")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("FuncionarioId");
 
