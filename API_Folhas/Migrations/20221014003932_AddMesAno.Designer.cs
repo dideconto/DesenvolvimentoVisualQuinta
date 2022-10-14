@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_FOlhas.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221013222641_AddTableFolhas")]
-    partial class AddTableFolhas
+    [Migration("20221014003932_AddMesAno")]
+    partial class AddMesAno
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,13 +24,42 @@ namespace API_FOlhas.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("Ano")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CriadoEm")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("FuncionarioId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("ImpostoFgts")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("ImpostoInss")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("ImpostoRenda")
+                        .HasColumnType("REAL");
+
+                    b.Property<int>("Mes")
+                        .HasColumnType("INTEGER");
+
                     b.Property<int>("QuantidadeHoras")
                         .HasColumnType("INTEGER");
+
+                    b.Property<double>("SalarioBruto")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("SalarioLiquido")
+                        .HasColumnType("REAL");
 
                     b.Property<double>("ValorHora")
                         .HasColumnType("REAL");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FuncionarioId");
 
                     b.ToTable("Folhas");
                 });
@@ -65,6 +94,17 @@ namespace API_FOlhas.Migrations
                     b.HasKey("FuncionarioId");
 
                     b.ToTable("Funcionarios");
+                });
+
+            modelBuilder.Entity("API_Folhas.Models.FolhaPagamento", b =>
+                {
+                    b.HasOne("API_Folhas.Models.Funcionario", "Funcionario")
+                        .WithMany()
+                        .HasForeignKey("FuncionarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Funcionario");
                 });
 #pragma warning restore 612, 618
         }

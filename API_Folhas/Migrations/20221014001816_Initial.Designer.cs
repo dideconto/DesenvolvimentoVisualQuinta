@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API_FOlhas.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221013224447_AddImpostos")]
-    partial class AddImpostos
+    [Migration("20221014001816_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,6 +22,9 @@ namespace API_FOlhas.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("FuncionarioId")
                         .HasColumnType("INTEGER");
 
                     b.Property<double>("ImpostoFgts")
@@ -46,6 +49,8 @@ namespace API_FOlhas.Migrations
                         .HasColumnType("REAL");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FuncionarioId");
 
                     b.ToTable("Folhas");
                 });
@@ -80,6 +85,18 @@ namespace API_FOlhas.Migrations
                     b.HasKey("FuncionarioId");
 
                     b.ToTable("Funcionarios");
+                });
+
+            modelBuilder.Entity("API_Folhas.Models.FolhaPagamento", b =>
+                {
+                    b.HasOne("API_Folhas.Models.Funcionario", null)
+                        .WithMany("Folhas")
+                        .HasForeignKey("FuncionarioId");
+                });
+
+            modelBuilder.Entity("API_Folhas.Models.Funcionario", b =>
+                {
+                    b.Navigation("Folhas");
                 });
 #pragma warning restore 612, 618
         }
