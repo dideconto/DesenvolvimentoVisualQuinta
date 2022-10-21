@@ -1,9 +1,13 @@
-<h1>Cadastrar Funcionário</h1>
+<h2>Cadastrar Funcionário</h2>
 
-<div>
-    <label for="">Número 1:</label>
-    <input type="text">
+<div id="nome">
+  <label for="txtNome">Nome</label>
+  <input type="text" id="txtNome" [(ngModel)]="numero1" />
 </div>
-<div>
-    <button (click)="calcular()">Calcular</button>
+<div id="cpf">
+  <label for="txtCpf">CPF</label>
+  <input type="text" id="txtCpf" [(ngModel)]="numero2" />
+</div>
+<div id="botao">
+  <button id="btnCadastrar" (click)="cadastrar()">Cadastrar</button>
 </div>
