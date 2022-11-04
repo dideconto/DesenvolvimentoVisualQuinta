@@ -9,6 +9,10 @@ const routes: Routes = [
     component: CadastrarFuncionarioComponent
   },
   {
+    path: "pages/funcionario/cadastrar/:id",
+    component: CadastrarFuncionarioComponent
+  },
+  {
     path: "pages/funcionario/listar",
     component: ListarFuncionariosComponent
   }

@@ -9,6 +9,8 @@ import { Funcionario } from 'src/app/models/funcionario';
 })
 export class ListarFuncionariosComponent implements OnInit {
 
+  funcionarios!: Funcionario[];
+
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -22,8 +24,19 @@ export class ListarFuncionariosComponent implements OnInit {
         next: (funcionarios) => {
           //Executamos o que for necessário quando a requisição
           //for bem-sucedida
-          console.table(funcionarios);
+          this.funcionarios = funcionarios;
         }
+      });
+  }
+
+  remover(id: number): void {
+    this.http.
+      delete<Funcionario>
+      (`https://localhost:5001/api/funcionario/deletar/${id}`)
+      .subscribe({
+        next: (funcionario) => {
+          this.ngOnInit();
+        },
       });
   }
 

@@ -1,5 +1,6 @@
 <h2>Cadastrar Funcionário</h2>
 
+{{ id }}
 <div id="nome">
   <label for="txtNome">Nome</label>
   <input type="text" id="txtNome" [(ngModel)]="nome" />
@@ -12,5 +13,5 @@
   <button id="btnCadastrar" (click)="cadastrar()">Cadastrar</button>
 </div>
 <div>
-  <h3>{{ soma }}</h3>
+  <h3 class="erro">{{ mensagem }}</h3>
 </div>

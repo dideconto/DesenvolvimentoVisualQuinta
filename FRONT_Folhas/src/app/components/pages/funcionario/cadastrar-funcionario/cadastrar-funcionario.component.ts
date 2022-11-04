@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Funcionario } from "src/app/models/funcionario";
 
 @Component({
@@ -10,12 +11,23 @@ import { Funcionario } from "src/app/models/funcionario";
 export class CadastrarFuncionarioComponent implements OnInit {
   nome!: string;
   cpf!: string;
-  soma!: number;
+  mensagem!: string;
+  id!: string;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
-    console.log("Inicializamos o componente!");
+    this.route.params.subscribe({
+      next: (params) => {
+        let { id } = params;
+        this.id = id;
+        this.nome = "sadjhasjkdhakjshd";
+      }
+    })
   }
 
   cadastrar(): void {
@@ -39,7 +51,16 @@ export class CadastrarFuncionarioComponent implements OnInit {
         next: (funcionario) => {
           //Executamos o que for necessário quando a requisição
           //for bem-sucedida
-          console.log("Gravamos um funcionário", funcionario);
+          this.router.navigate(["pages/funcionario/listar"]);
+        },
+        error: (error) => {
+          //Executamos o que for necessário quando a requisição
+          //for mal-sucedida
+          if (error.status === 400) {
+            this.mensagem = "Algum erro de validação aconteceu!";
+          } else if (error.status === 0) {
+            this.mensagem = "A sua API não está rodando!";
+          }
         }
       });
   }
