@@ -10,7 +10,8 @@
   <input type="text" id="txtCpf" [(ngModel)]="cpf" />
 </div>
 <div id="botao">
-  <button id="btnCadastrar" (click)="cadastrar()">Cadastrar</button>
+  <button *ngIf="!id" id="btnCadastrar" (click)="cadastrar()">Cadastrar</button>
+  <button *ngIf="id" id="btnAlterar" (click)="alterar()">Salvar</button>
 </div>
 <div>
   <h3 class="erro">{{ mensagem }}</h3>

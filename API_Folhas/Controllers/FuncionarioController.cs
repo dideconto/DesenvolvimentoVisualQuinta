@@ -33,17 +33,14 @@ namespace API_Folhas.Controllers
             return Created("", funcionario);
         }
 
-        // GET: /api/funcionario/buscar/123
-        [Route("buscar/{cpf}")]
+        // GET: /api/funcionario/buscar/1
+        [Route("buscar/{id}")]
         [HttpGet]
-        public IActionResult Buscar([FromRoute] string cpf)
+        public IActionResult Buscar([FromRoute] int id)
         {
             //Expressão lambda
             Funcionario funcionario =
-                _context.Funcionarios.FirstOrDefault
-            (
-                f => f.Cpf.Equals(cpf)
-            );
+                _context.Funcionarios.Find(id);
             //IF ternário
             return funcionario != null ? Ok(funcionario) : NotFound();
         }

@@ -24,14 +24,46 @@ export class CadastrarFuncionarioComponent implements OnInit {
     this.route.params.subscribe({
       next: (params) => {
         let { id } = params;
-        this.id = id;
-        this.nome = "sadjhasjkdhakjshd";
+        if (id !== undefined) {
+          this.http.
+            get<Funcionario>(
+              `https://localhost:5001/api/funcionario/buscar/${id}`
+            )
+            .subscribe({
+              next: (funcionario) => {
+                this.id = id;
+                this.nome = funcionario.nome;
+                this.cpf = funcionario.cpf;
+              }
+            });
+        }
       }
     })
   }
 
-  cadastrar(): void {
+  alterar(): void {
+    let funcionario: Funcionario = {
+      funcionarioId: Number.parseInt(this.id),
+      nome: this.nome,
+      cpf: this.cpf,
+      salario: 950,
+      email: "diogo@diogo.com",
+      nascimento: "2022-10-27"
+    };
 
+    this.http.
+      patch<Funcionario>(
+        "https://localhost:5001/api/funcionario/alterar",
+        funcionario
+      )
+      .subscribe({
+        next: (funcionario) => {
+          this.router.navigate(["pages/funcionario/listar"]);
+        }
+      });
+  }
+
+  cadastrar(): void {
     let funcionario: Funcionario = {
       nome: this.nome,
       cpf: this.cpf,
