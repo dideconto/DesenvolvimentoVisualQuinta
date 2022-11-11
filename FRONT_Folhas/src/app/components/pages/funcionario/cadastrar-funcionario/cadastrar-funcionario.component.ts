@@ -11,34 +11,28 @@ import { Funcionario } from "src/app/models/funcionario";
 export class CadastrarFuncionarioComponent implements OnInit {
   nome!: string;
   cpf!: string;
+  email!: string;
+  nascimento!: string;
   mensagem!: string;
   id!: string;
 
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private route: ActivatedRoute
-  ) { }
+  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.params.subscribe({
       next: (params) => {
         let { id } = params;
         if (id !== undefined) {
-          this.http.
-            get<Funcionario>(
-              `https://localhost:5001/api/funcionario/buscar/${id}`
-            )
-            .subscribe({
-              next: (funcionario) => {
-                this.id = id;
-                this.nome = funcionario.nome;
-                this.cpf = funcionario.cpf;
-              }
-            });
+          this.http.get<Funcionario>(`https://localhost:5001/api/funcionario/buscar/${id}`).subscribe({
+            next: (funcionario) => {
+              this.id = id;
+              this.nome = funcionario.nome;
+              this.cpf = funcionario.cpf;
+            },
+          });
         }
-      }
-    })
+      },
+    });
   }
 
   alterar(): void {
@@ -47,20 +41,15 @@ export class CadastrarFuncionarioComponent implements OnInit {
       nome: this.nome,
       cpf: this.cpf,
       salario: 950,
-      email: "diogo@diogo.com",
-      nascimento: "2022-10-27"
+      email: this.email,
+      nascimento: this.nascimento,
     };
 
-    this.http.
-      patch<Funcionario>(
-        "https://localhost:5001/api/funcionario/alterar",
-        funcionario
-      )
-      .subscribe({
-        next: (funcionario) => {
-          this.router.navigate(["pages/funcionario/listar"]);
-        }
-      });
+    this.http.patch<Funcionario>("https://localhost:5001/api/funcionario/alterar", funcionario).subscribe({
+      next: (funcionario) => {
+        this.router.navigate(["pages/funcionario/listar"]);
+      },
+    });
   }
 
   cadastrar(): void {
@@ -68,16 +57,13 @@ export class CadastrarFuncionarioComponent implements OnInit {
       nome: this.nome,
       cpf: this.cpf,
       salario: 950,
-      email: "diogo@diogo.com",
-      nascimento: "2022-10-27"
+      email: this.email,
+      nascimento: this.nascimento,
     };
 
     //Configurando a requisição para a API
-    this.http.
-      post<Funcionario>(
-        "https://localhost:5001/api/funcionario/cadastrar",
-        funcionario
-      )
+    this.http
+      .post<Funcionario>("https://localhost:5001/api/funcionario/cadastrar", funcionario)
       // Executar a requisição
       .subscribe({
         next: (funcionario) => {
@@ -93,7 +79,7 @@ export class CadastrarFuncionarioComponent implements OnInit {
           } else if (error.status === 0) {
             this.mensagem = "A sua API não está rodando!";
           }
-        }
+        },
       });
   }
 }
