@@ -8,6 +8,8 @@ import { AppComponent } from "./app.component";
 import { CadastrarFuncionarioComponent } from "./components/pages/funcionario/cadastrar-funcionario/cadastrar-funcionario.component";
 import { ListarFuncionariosComponent } from "./components/pages/funcionario/listar-funcionarios/listar-funcionarios.component";
 import { CadastrarFolhaComponent } from './components/pages/folha/cadastrar-folha/cadastrar-folha.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ListarFolhaComponent } from './components/pages/folha/listar-folha/listar-folha.component';
 
 @NgModule({
   declarations: [
@@ -15,9 +17,11 @@ import { CadastrarFolhaComponent } from './components/pages/folha/cadastrar-folh
     CadastrarFuncionarioComponent,
     ListarFuncionariosComponent,
     CadastrarFolhaComponent,
+    ListarFolhaComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule,
-    HttpClientModule],
+    HttpClientModule,
+    BrowserAnimationsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
