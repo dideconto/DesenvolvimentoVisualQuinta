@@ -1,0 +1,25 @@
+<h2>Cadastrar Folha</h2>
+
+<div id="valor">
+    <label for="txtValor">Valor da Hora</label>
+    <input type="number" id="txtValor" [(ngModel)]="valorHora" />
+</div>
+<div id="quantidade">
+    <label for="txtQuantidade">Quantidade de Horas</label>
+    <input type="number" id="txtQuantidade" [(ngModel)]="quantidadeHoras" />
+</div>
+<div id="data">
+    <label for="txtData">Data</label>
+    <input type="date" id="txtData" [(ngModel)]="data" />
+</div>
+<div id="funcionarios">
+    <label for="selFuncionarios">Funcionários</label>
+    <select [(ngModel)]="funcionarioId">
+        <option *ngFor="let funcionario of funcionarios" value="{{funcionario.funcionarioId}}">
+            {{ funcionario.funcionarioId }} - {{ funcionario.nome }}
+        </option>
+    </select>
+</div>
+<div id="botao">
+    <button id="btnCadastrar" (click)="cadastrar()">Cadastrar</button>
+</div>
