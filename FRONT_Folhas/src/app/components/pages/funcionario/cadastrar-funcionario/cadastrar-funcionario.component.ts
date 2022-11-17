@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Funcionario } from "src/app/models/funcionario";
 
@@ -16,7 +17,12 @@ export class CadastrarFuncionarioComponent implements OnInit {
   mensagem!: string;
   id!: string;
 
-  constructor(private http: HttpClient, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private route: ActivatedRoute,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe({
@@ -47,6 +53,10 @@ export class CadastrarFuncionarioComponent implements OnInit {
 
     this.http.patch<Funcionario>("https://localhost:5001/api/funcionario/alterar", funcionario).subscribe({
       next: (funcionario) => {
+        this._snackBar.open("Funcionário alterado!", "Ok!", {
+          horizontalPosition: "right",
+          verticalPosition: "top",
+        });
         this.router.navigate(["pages/funcionario/listar"]);
       },
     });
@@ -69,6 +79,10 @@ export class CadastrarFuncionarioComponent implements OnInit {
         next: (funcionario) => {
           //Executamos o que for necessário quando a requisição
           //for bem-sucedida
+          this._snackBar.open("Funcionário cadastrado!", "Ok!", {
+            horizontalPosition: "right",
+            verticalPosition: "top",
+          });
           this.router.navigate(["pages/funcionario/listar"]);
         },
         error: (error) => {

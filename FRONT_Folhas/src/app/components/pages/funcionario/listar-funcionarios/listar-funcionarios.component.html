@@ -1,34 +1,30 @@
 <h1>Listar Funcionários</h1>
 
 <table>
-    <tr>
-        <th>#</th>
-        <th>Nome</th>
-        <th>CPF</th>
-        <th>E-mail</th>
-        <th>Salário</th>
-        <th>Nascimento</th>
-        <th>Criado em</th>
-        <th>Remover</th>
-        <th>Alterar</th>
-    </tr>
-    <tr *ngFor="let funcionario of funcionarios">
-        <td>{{funcionario.funcionarioId}}</td>
-        <td>{{funcionario.nome}}</td>
-        <td>{{funcionario.cpf}}</td>
-        <td>{{funcionario.email}}</td>
-        <td>{{funcionario.salario}}</td>
-        <td>{{funcionario.nascimento}}</td>
-        <td>{{funcionario.criadoEm}}</td>
-        <td>
-            <button (click)="remover(funcionario.funcionarioId!)">
-                Remover
-            </button>
-        </td>
-        <td>
-            <a routerLink="/pages/funcionario/cadastrar/{{ funcionario.funcionarioId }}">
-                Alterar
-            </a>
-        </td>
-    </tr>
+  <tr>
+    <th>#</th>
+    <th>Nome</th>
+    <th>CPF</th>
+    <th>E-mail</th>
+    <th>Salário</th>
+    <th>Nascimento</th>
+    <th>Criado em</th>
+    <th>Remover</th>
+    <th>Alterar</th>
+  </tr>
+  <tr *ngFor="let funcionario of funcionarios">
+    <td>{{ funcionario.funcionarioId }}</td>
+    <td>{{ funcionario.nome }}</td>
+    <td>{{ funcionario.cpf }}</td>
+    <td>{{ funcionario.email }}</td>
+    <td>{{ funcionario.salario }}</td>
+    <td>{{ funcionario.nascimento | date: "dd/MM/yyyy" }}</td>
+    <td>{{ funcionario.criadoEm | date: "dd/MM/yyyy" }}</td>
+    <td>
+      <button (click)="remover(funcionario.funcionarioId!)">Remover</button>
+    </td>
+    <td>
+      <a routerLink="/pages/funcionario/cadastrar/{{ funcionario.funcionarioId }}"> Alterar </a>
+    </td>
+  </tr>
 </table>

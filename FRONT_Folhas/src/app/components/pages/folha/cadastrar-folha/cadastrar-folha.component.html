@@ -1,25 +1,26 @@
-<h2>Cadastrar Folha</h2>
-
-<div id="valor">
-    <label for="txtValor">Valor da Hora</label>
-    <input type="number" id="txtValor" [(ngModel)]="valorHora" />
-</div>
-<div id="quantidade">
-    <label for="txtQuantidade">Quantidade de Horas</label>
-    <input type="number" id="txtQuantidade" [(ngModel)]="quantidadeHoras" />
-</div>
-<div id="data">
-    <label for="txtData">Data</label>
-    <input type="date" id="txtData" [(ngModel)]="data" />
-</div>
-<div id="funcionarios">
-    <label for="selFuncionarios">Funcionários</label>
-    <select [(ngModel)]="funcionarioId">
-        <option *ngFor="let funcionario of funcionarios" value="{{funcionario.funcionarioId}}">
-            {{ funcionario.funcionarioId }} - {{ funcionario.nome }}
-        </option>
-    </select>
-</div>
-<div id="botao">
-    <button id="btnCadastrar" (click)="cadastrar()">Cadastrar</button>
-</div>
+<mat-card class="container">
+  <mat-card-header> <mat-card-title> Cadastrar Folha </mat-card-title> </mat-card-header>
+  <mat-card-content>
+    <mat-form-field id="valor" class="input">
+      <mat-label for="txtValor">Valor da Hora:</mat-label>
+      <input matInput type="number" id="txtValor" [(ngModel)]="valorHora" />
+    </mat-form-field>
+    <mat-form-field id="quantidade" class="input">
+      <mat-label for="txtQuantidade">Quantidade de Horas:</mat-label>
+      <input matInput type="number" id="txtQuantidade" [(ngModel)]="quantidadeHoras" />
+    </mat-form-field>
+    <mat-form-field id="data" class="input">
+      <mat-label for="txtData">Data:</mat-label>
+      <input matInput type="date" id="txtData" [(ngModel)]="data" />
+    </mat-form-field>
+    <mat-form-field id="funcionarios" class="input">
+      <mat-label for="selFuncionarios">Funcionários</mat-label>
+      <mat-select [(ngModel)]="funcionarioId">
+        <mat-option *ngFor="let funcionario of funcionarios" value="{{ funcionario.funcionarioId }}">
+          {{ funcionario.funcionarioId }} - {{ funcionario.nome }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-content>
+  <button mat-raised-button color="warn" id="btnCadastrar" (click)="cadastrar()">Cadastrar</button>
+</mat-card>

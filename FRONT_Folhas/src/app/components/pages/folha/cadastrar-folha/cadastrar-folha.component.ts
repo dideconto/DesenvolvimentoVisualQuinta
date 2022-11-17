@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Router } from "@angular/router";
 import { Folha } from "src/app/models/folha";
 import { Funcionario } from "src/app/models/funcionario";
@@ -16,7 +17,7 @@ export class CadastrarFolhaComponent implements OnInit {
   funcionarios!: Funcionario[];
   funcionarioId!: number;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.http.get<Funcionario[]>("https://localhost:5001/api/funcionario/listar").subscribe({
@@ -40,6 +41,10 @@ export class CadastrarFolhaComponent implements OnInit {
 
     this.http.post<Folha>("https://localhost:5001/api/folha/cadastrar", folha).subscribe({
       next: (folha) => {
+        this._snackBar.open("Folha cadastrada!", "Ok!", {
+          horizontalPosition: "right",
+          verticalPosition: "top",
+        });
         this.router.navigate(["pages/folha/listar"]);
       },
     });
